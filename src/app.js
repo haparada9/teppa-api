@@ -17,6 +17,11 @@ app.get("/candidatos", (req, res) => {
   res.status(200).json(candidatos);
 });
 
+app.get("/candidatos/:id", (req, res) => {
+  let index = buscaCandidato(req.params.id);
+  res.json(candidatos[index]);
+});
+
 app.post("/candidatos", (req, res) => {
   candidatos.push(req.body);
   res.status(201).send("Candidato cadastrado com sucesso!");
@@ -26,6 +31,13 @@ app.put("/candidatos/:id", (req, res) => {
   let index = buscaCandidato(req.params.id);
   candidatos[index].nome = req.body.nome;
   res.json(candidatos);
+});
+
+app.delete("/candidatos/:id", (req, res) => {
+  let { id } = req.params;
+  let index = buscaCandidato(id);
+  candidatos.splice(index, 1);
+  res.send(`Candidato ${id} removido com sucesso!`);
 });
 
 function buscaCandidato(id) {
