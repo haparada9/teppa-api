@@ -24,11 +24,6 @@ app.get("/candidatos", (req, res) => {
   });
 });
 
-app.post("/candidatos", (req, res) => {
-  candidatos.push(req.body);
-  res.status(201).send("Candidato cadastrado com sucesso!");
-});
-
 app.put("/candidatos/:id", (req, res) => {
   let index = buscaCandidato(req.params.id);
   candidatos[index].nome = req.body.nome;
