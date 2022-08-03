@@ -40,7 +40,19 @@ class CandidatoController {
             if(!err) {
                 res.status(200).send({message: 'Candidato atualizado com sucesso!'})
             } else {
-                res.status(500).send({message: err.message})
+                res.status(500).send({message: 'Falha ao atualizar candidato. Id inexistente.'})
+            }
+        })
+    }
+
+    static excluirCandidato = (req, res) => {
+        const id = req.params.id;
+
+        candidatos.findByIdAndDelete(id, (err) => {
+            if(!err) {
+                res.status(200).send({message: 'Candidato removido com sucesso!'})
+            } else {
+                res.status(500).send({message: 'Falha ao excluir candidato. Id inexistente.'})
             }
         })
     }

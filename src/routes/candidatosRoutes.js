@@ -8,5 +8,7 @@ router
     .get("/candidatos/:id", CandidatoController.listarCandidatoPorId)
     .post("/candidatos", CandidatoController.cadastrarCandidato)
     .put("/candidatos/:id", CandidatoController.atualizarCandidato)
+    .delete("/candidatos/:id", CandidatoController.excluirCandidato)
+
 
     export default router;
