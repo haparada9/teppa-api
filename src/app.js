@@ -1,31 +1,27 @@
 import express from "express";
-import db from "./config/dbConnect.js"
+import db from "./config/dbConnect.js";
+import candidatos from "./models/Candidato.js";
+import routes from "./routes/index.js";
 
-db.on("error", console.log.bind(console, 'Erro de conexão!'))
+db.on("error", console.log.bind(console, "Erro de conexão!"));
 db.once("open", () => {
-  console.log('conexão com o banco feita com sucesso!')
-})
+  console.log("conexão com o banco feita com sucesso!");
+});
 
 const app = express();
 
 app.use(express.json());
 
-const candidatos = [
-  { id: 1, nome: "Hugo Parada" },
-  { id: 2, nome: "Paula Dentino" },
-];
-
-app.get("/", (req, res) => {
-  res.status(200).send("Candidato para vaga dev jr");
-});
+routes(app);
+//const candidatos = [
+//  { id: 1, nome: "Hugo Parada" },
+// { id: 2, nome: "Paula Dentino" },
+//];
 
 app.get("/candidatos", (req, res) => {
-  res.status(200).json(candidatos);
-});
-
-app.get("/candidatos/:id", (req, res) => {
-  let index = buscaCandidato(req.params.id);
-  res.json(candidatos[index]);
+  candidatos.find((err, candidatos) => {
+    res.status(200).json(candidatos);
+  });
 });
 
 app.post("/candidatos", (req, res) => {
