@@ -5,7 +5,8 @@ const router = express.Router();
 
 router
     .get("/candidatos", CandidatoController.listarCandidatos)
+    .get("/candidatos/:id", CandidatoController.listarCandidatoPorId)
     .post("/candidatos", CandidatoController.cadastrarCandidato)
-
+    .put("/candidatos/:id", CandidatoController.atualizarCandidato)
 
     export default router;
